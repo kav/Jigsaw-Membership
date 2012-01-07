@@ -2,6 +2,9 @@ express = require('express')
 stylus  = require('stylus')
 url = require('url')
 http = require('http')
+
+google = require(__dirname + '/middleware/google')
+
 app = module.exports = express.createServer()
 
 app.configure ->
@@ -42,6 +45,7 @@ app.configure 'production', ->
   app.use express.errorHandler()
   process.on 'uncaughtException', (err) -> console.log "ERROR: #{err}"
 
+#app.get '/', google.ensureLogin, (req, res) ->
 app.get '/', (req, res) ->
   res.send('Hello World')
   
